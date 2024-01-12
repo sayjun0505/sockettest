@@ -7,10 +7,20 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: true
 }));
-app.use(bodyParser.json())
-app.use(cors({
-  origin: '*', // Replace with the URL of your frontend app
-}));
+app.use(bodyParser.json());
+const corsOpts = {
+  origin: '*',
+
+  methods: [
+    'GET',
+    'POST',
+  ],
+
+  allowedHeaders: [
+    'Content-Type',
+  ],
+};
+app.use(cors(corsOpts));
 var http = require('http').Server(app);
 
 var io = require('socket.io')(http);
