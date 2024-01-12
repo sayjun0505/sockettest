@@ -8,9 +8,13 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 app.use(bodyParser.json())
-app.use(cors());
+app.use(cors({
+  origin: '*', // Replace with the URL of your frontend app
+}));
 var http = require('http').Server(app);
+
 var io = require('socket.io')(http);
+
 io.on('connection', (socket)=>{
   socket.on('ctrl', (keyPressed) => {
     console.log("input key",keyPressed);
